@@ -18,6 +18,19 @@ exports.handler = async function(event, context) {
     const body = JSON.parse(event.body);
     numeroEmpleado = body.numeroEmpleado;
     idMovement = body.idMovement;
+    if (!numeroEmpleado || !idMovement) {
+      return {
+        statusCode: 400,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          status: "error",
+          data: null,
+          error: "Parámetros son obligatorios."
+        })
+      };
+    }
   } catch (e) {
     return {
       statusCode: 400,
